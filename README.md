@@ -99,18 +99,6 @@ Backend validates token using Middleware
 
 ---
 
-### 📸 Screenshots
-
-![alt text](/screenshots/Home.png)
-![alt text](/screenshots/Register.png)
-![alt text](/screenshots/RegisterSuccessful.png)
-![alt text](/screenshots/Login.png)
-![alt text](/screenshots/Dashboard.png)
-![alt text](/screenshots/UploadSuccessful.png)
-![alt text](/screenshots/View.png)
-
----
-
 👩‍💻 Author
 
 Anvesha Goydani
