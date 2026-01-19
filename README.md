@@ -99,15 +99,15 @@ Backend validates token using Middleware
 
 ---
 
-### 📸 Screensshots
+### 📸 Screenshots
 
-<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/7cfb1595-69d5-4284-adb1-78d9402d6187" />
-![alt text](screenshots/Register.png)
-![alt text](screenshots/RegisterSuccessful.png)
-![alt text](screenshots/Login.png)
-![alt text](screenshots/Dashboard.png)
-![alt text](screenshots/UploadSuccessful.png)
-![alt text](screenshots/View.png)
+![alt text](/screenshots/Home.png)
+![alt text](/screenshots/Register.png)
+![alt text](/screenshots/RegisterSuccessful.png)
+![alt text](/screenshots/Login.png)
+![alt text](/screenshots/Dashboard.png)
+![alt text](/screenshots/UploadSuccessful.png)
+![alt text](/screenshots/View.png)
 
 ---
 
