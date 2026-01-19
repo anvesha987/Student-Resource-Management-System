@@ -101,7 +101,7 @@ Backend validates token using Middleware
 
 ### 📸 Screensshots
 
-<img src="screenshots/Home.png" alt="Home Screen" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/7cfb1595-69d5-4284-adb1-78d9402d6187" />
 ![alt text](screenshots/Register.png)
 ![alt text](screenshots/RegisterSuccessful.png)
 ![alt text](screenshots/Login.png)
