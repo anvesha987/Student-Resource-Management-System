@@ -1,0 +1,15 @@
+:root{
+  --bg-dark: #070a1a;
+  --card-dark: #0e132b;
+  --neon-purple: #8b5cf6;
+  --neon-blue: #38bdf8;
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+  --radius: 18px;
+}
+
+body{
+  background: radial-gradient(circle at top, #1b1240, #070a1a);
+  color: var(--text-main);
+  font-family: "Inter", "Segoe UI", sans-serif;
+}

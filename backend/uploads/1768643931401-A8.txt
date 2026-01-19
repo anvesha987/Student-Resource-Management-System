@@ -1,0 +1,236 @@
+Microsoft Windows [Version 10.0.19045.6332]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\admin>sqlplus
+
+SQL*Plus: Release 21.0.0.0.0 - Production on Sun Sep 28 23:28:18 2025
+Version 21.3.0.0.0
+
+Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+
+Enter user-name: system
+Enter password:
+Last Successful login time: Sun Sep 28 2025 23:27:05 -07:00
+
+Connected to:
+Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
+Version 21.3.0.0.0
+
+SQL> DROP TABLE lib;
+
+Table dropped.
+
+SQL> CREATE TABLE lib(rno NUMBER, name VARCHAR(10), doi DATE, bookname VARCHAR(10), status NUMBER);
+
+Table created.
+
+SQL> INSERT INTO lib VALUES(101, 'Raj', TO_DATE('01/09/2025', 'DD/MM/YYYY'), 'DBMS', 1);
+
+1 row created.
+
+SQL> INSERT INTO lib VALUES(102, 'Geeta', TO_DATE('29/08/2025', 'DD/MM/YYYY'), 'CNS', 1);
+
+1 row created.
+
+SQL> INSERT INTO lib VALUES(103, 'Shyam', TO_DATE('03/09/2025', 'DD/MM/YYYY'), 'DS', 1);
+
+1 row created.
+
+SQL> INSERT INTO lib VALUES(104, 'Sita', TO_DATE('25/08/2025', 'DD/MM/YYYY'), 'SPOS', 1);
+
+1 row created.
+
+SQL> INSERT INTO lib VALUES(105, 'Mohan', TO_DATE('05/09/2025', 'DD/MM/YYYY'), 'TOC', 1);
+
+1 row created.
+
+SQL> SELECT * FROM lib;
+
+       RNO NAME       DOI       BOOKNAME       STATUS
+---------- ---------- --------- ---------- ----------
+       101 Raj        01-SEP-25 DBMS                1
+       102 Geeta      29-AUG-25 CNS                 1
+       103 Shyam      03-SEP-25 DS                  1
+       104 Sita       25-AUG-25 SPOS                1
+       105 Mohan      05-SEP-25 TOC                 1
+
+SQL> DROP TABLE lib_audit;
+
+Table dropped.
+
+SQL> CREATE TABLE lib_audit(rno NUMBER, name VARCHAR(10), doi DATE, bookname VARCHAR(10), status NUMBER, op VARCHAR(10), ts TIMESTAMP);
+
+Table created.
+
+SQL> SELECT * FROM lib_audit;
+
+no rows selected
+
+SQL> SET SERVEROUTPUT ON;
+
+SQL> CREATE OR REPLACE TRIGGER for_insert
+  2  AFTER INSERT ON lib
+  3  FOR EACH ROW
+  4  BEGIN
+  5  INSERT INTO lib_audit VALUES(:NEW.rno, :NEW.name, :NEW.doi, :NEW.bookname, :NEW.status, 'INSERT', SYSTIMESTAMP);
+  6  END;
+  7  /
+
+Trigger created.
+
+SQL> INSERT INTO lib VALUES(106, 'Ram', TO_DATE('23/08/2025', 'DD/MM/YYYY'), 'HCI', 1);
+
+1 row created.
+
+SQL> SELECT * FROM lib;
+
+       RNO NAME       DOI       BOOKNAME       STATUS
+---------- ---------- --------- ---------- ----------
+       101 Raj        01-SEP-25 DBMS                1
+       102 Geeta      29-AUG-25 CNS                 1
+       103 Shyam      03-SEP-25 DS                  1
+       104 Sita       25-AUG-25 SPOS                1
+       105 Mohan      05-SEP-25 TOC                 1
+       106 Ram        23-AUG-25 HCI                 1
+
+6 rows selected.
+
+SQL> SELECT * FROM lib_audit;
+
+       RNO NAME       DOI       BOOKNAME       STATUS OP
+---------- ---------- --------- ---------- ---------- ----------
+TS
+---------------------------------------------------------------------------
+       106 Ram        23-AUG-25 HCI                 1 INSERT
+28-SEP-25 11.28.26.816000 PM
+
+SQL> CREATE OR REPLACE TRIGGER for_update
+  2  AFTER UPDATE ON lib
+  3  FOR EACH ROW
+  4  BEGIN
+  5  INSERT INTO lib_audit VALUES(:OLD.rno, :OLD.name, :OLD.doi, :OLD.bookname, :OLD.status, 'UPDATE', SYSTIMESTAMP);
+  6  END;
+  7  /
+
+Trigger created.
+
+SQL> UPDATE lib SET bookname='IOT' WHERE rno=103;
+
+1 row updated.
+
+SQL> SELECT * FROM lib;
+
+       RNO NAME       DOI       BOOKNAME       STATUS
+---------- ---------- --------- ---------- ----------
+       101 Raj        01-SEP-25 DBMS                1
+       102 Geeta      29-AUG-25 CNS                 1
+       103 Shyam      03-SEP-25 IOT                 1
+       104 Sita       25-AUG-25 SPOS                1
+       105 Mohan      05-SEP-25 TOC                 1
+       106 Ram        23-AUG-25 HCI                 1
+
+6 rows selected.
+
+SQL> SELECT * FROM lib_audit;
+
+       RNO NAME       DOI       BOOKNAME       STATUS OP
+---------- ---------- --------- ---------- ---------- ----------
+TS
+---------------------------------------------------------------------------
+       106 Ram        23-AUG-25 HCI                 1 INSERT
+28-SEP-25 11.28.26.816000 PM
+
+       103 Shyam      03-SEP-25 DS                  1 UPDATE
+28-SEP-25 11.28.26.849000 PM
+
+SQL> CREATE OR REPLACE TRIGGER for_delete
+  2  AFTER DELETE ON lib
+  3  FOR EACH ROW
+  4  BEGIN
+  5  INSERT INTO lib_audit VALUES(:OLD.rno, :OLD.name, :OLD.doi, :OLD.bookname, :OLD.status, 'DELETE', SYSTIMESTAMP);
+  6  END;
+  7  /
+
+Trigger created.
+
+SQL> DELETE FROM lib WHERE rno = 106;
+
+1 row deleted.
+
+SQL> SELECT * FROM lib;
+
+       RNO NAME       DOI       BOOKNAME       STATUS
+---------- ---------- --------- ---------- ----------
+       101 Raj        01-SEP-25 DBMS                1
+       102 Geeta      29-AUG-25 CNS                 1
+       103 Shyam      03-SEP-25 IOT                 1
+       104 Sita       25-AUG-25 SPOS                1
+       105 Mohan      05-SEP-25 TOC                 1
+
+SQL> SELECT * FROM lib_audit;
+
+       RNO NAME       DOI       BOOKNAME       STATUS OP
+---------- ---------- --------- ---------- ---------- ----------
+TS
+---------------------------------------------------------------------------
+       106 Ram        23-AUG-25 HCI                 1 INSERT
+28-SEP-25 11.28.26.816000 PM
+
+       103 Shyam      03-SEP-25 DS                  1 UPDATE
+28-SEP-25 11.28.26.849000 PM
+
+       106 Ram        23-AUG-25 HCI                 1 DELETE
+28-SEP-25 11.28.26.887000 PM
+
+
+SQL> CREATE OR REPLACE TRIGGER for_allop
+  2  AFTER INSERT OR UPDATE OR DELETE ON lib
+  3  FOR EACH ROW
+  4  BEGIN
+  5      IF INSERTING THEN
+  6          INSERT INTO lib_audit 
+  7          VALUES(:NEW.rno, :NEW.name, :NEW.doi, :NEW.bookname, :NEW.status, 'INSERT', SYSTIMESTAMP);
+  8      ELSIF UPDATING THEN
+  9          INSERT INTO lib_audit 
+ 10          VALUES(:OLD.rno, :OLD.name, :OLD.doi, :OLD.bookname, :OLD.status, 'UPDATE', SYSTIMESTAMP);
+ 11      ELSIF DELETING THEN
+ 12          INSERT INTO lib_audit 
+ 13          VALUES(:OLD.rno, :OLD.name, :OLD.doi, :OLD.bookname, :OLD.status, 'DELETE', SYSTIMESTAMP);
+ 14      END IF;
+ 15  END;
+ 16  /
+
+Trigger created.
+
+SQL> INSERT INTO lib VALUES(107, 'Anita', TO_DATE('28/09/2025','DD/MM/YYYY'), 'AI', 1);
+
+1 row created.
+
+SQL> SELECT * FROM lib;
+
+       RNO NAME       DOI       BOOKNAME       STATUS
+---------- ---------- --------- ---------- ----------
+       101 Raj        01-SEP-25 DBMS                1
+       102 Geeta      29-AUG-25 CNS                 1
+       103 Shyam      03-SEP-25 IOT                 1
+       104 Sita       25-AUG-25 SPOS                1
+       105 Mohan      05-SEP-25 TOC                 1
+       107 Anita      28-SEP-25 AI                  1
+
+SQL> SELECT * FROM lib_audit;
+
+       RNO NAME       DOI       BOOKNAME       STATUS OP
+---------- ---------- --------- ---------- ---------- ----------
+TS
+---------------------------------------------------------------------------
+       106 Ram        23-AUG-25 HCI                 1 INSERT
+28-SEP-25 11.28.26.816000 PM
+
+       103 Shyam      03-SEP-25 DS                  1 UPDATE
+28-SEP-25 11.28.26.849000 PM
+
+       106 Ram        23-AUG-25 HCI                 1 DELETE
+28-SEP-25 11.28.26.887000 PM
+
+       107 Anita      28-SEP-25 AI                  1 INSERT
+28-SEP-25 11.59.15.123000 PM
