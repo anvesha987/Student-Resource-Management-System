@@ -101,15 +101,13 @@ Backend validates token using Middleware
 
 ### 📸 Screensshots
 
-![alt text](screenshots/Home.jpg)
-![alt text](screenshots/Register.jpg)
-![alt text](screenshots/RegisterUser.jpg)
-![alt text](screenshots/LoginUser.jpg)
-![alt text](screenshots/Login.jpg)
-![alt text](screenshots/Dashboard.jpg)
-![alt text](screenshots/Upload.jpg)
-![alt text](screenshots/UploadResource.jpg)
-![alt text](screenshots/View.jpg)
+![alt text](screenshots/Home.png)
+![alt text](screenshots/Register.png)
+![alt text](screenshots/RegisterSuccessful.png)
+![alt text](screenshots/Login.png)
+![alt text](screenshots/Dashboard.png)
+![alt text](screenshots/UploadSuccessful.png)
+![alt text](screenshots/View.png)
 
 ---
 
