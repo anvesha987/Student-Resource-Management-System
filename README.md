@@ -19,12 +19,14 @@ A full-stack MERN application that allows students to securely upload, manage, a
 ## 🛠️ Tech Stack
 
 **Frontend:**
+
 - React.js
 - React Router DOM
 - Axios
 - Bootstrap
 
 **Backend:**
+
 - Node.js
 - Express.js
 - MongoDB
@@ -35,6 +37,7 @@ A full-stack MERN application that allows students to securely upload, manage, a
 ---
 
 ## 📂 Project Structure
+
 frontend/
 ├─ src/
 │ ├─ api/
@@ -49,6 +52,38 @@ backend/
 ├─ middleware/
 ├─ models/
 └─ uploads/
+
+---
+
+## 📸 Screenshots
+
+🏠 Home Page
+The landing page of the Student Resource Management Portal, providing a brief overview of the platform with options to get started or log in.
+![Home](screenshots/Home.png)
+
+📝 Register Page
+New users can create an account by providing their name, email, and password.
+![Register](screenshots/Register.png)
+
+✅ Registration Successful
+Confirmation message displayed after successful user registration.
+![Registration Successful](screenshots/RegisterSuccessful.png)
+
+🔐 Login Page
+Allows registered users to securely log in using their email and password.
+![Login](screenshots/Login.png)
+
+📊 Dashboard
+The main dashboard where users can navigate to upload resources or view their uploaded materials.
+![Dashboard](screenshots/Dashboard.png)
+
+📤 Upload Resource
+Users can upload academic resources by providing a title, subject, and selecting a file.
+![Upload Successful](screenshots/UploadSuccessful.png)
+
+📚 View Resources
+Displays a list of uploaded resources with options to view or delete them.
+![View Resources](screenshots/View.png)
 
 ---
 
@@ -110,3 +145,4 @@ LinkedIn: https://www.linkedin.com/in/anvesha-goydani-b7b774293
 
 
 
+```
