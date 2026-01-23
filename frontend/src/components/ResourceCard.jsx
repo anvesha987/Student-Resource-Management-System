@@ -7,7 +7,7 @@ function ResourceCard({ resource, onDelete }) {
       </div>
       <div>
         <a
-          href={`http://localhost:3003/uploads/${resource.file}`}
+          href={`${import.meta.env.VITE_API_URL}/uploads/${resource.file}`}
           target="_blank"
           rel="noreferrer"
           className="btn btn-outline-primary me-2"
